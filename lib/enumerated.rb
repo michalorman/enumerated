@@ -16,15 +16,19 @@ module Enumerated
         @definitions[attr.to_sym] = Definition.new(enums)
       end
 
-      define_helper_methods(attr, enums, opts)
+      define_helper_methods(attr, opts)
+      define_label_methods(attr)
     end
 
     private
 
-    def define_helper_methods(attr, enums, opts)
+    def define_helper_methods(attr, opts)
       class_eval(<<-EOS, __FILE__, __LINE__ + 1)
         def self.#{attr.to_s.pluralize}
           @definitions[:#{attr.to_s}].to_a
+        end
+        def self.definitions
+          @definitions
         end
       EOS
 
@@ -36,6 +40,15 @@ module Enumerated
           end
         EOS
       end
+    end
+
+    def define_label_methods(attr)
+      class_eval(<<-EOS, __FILE__, __LINE__ + 1)
+        def #{attr.to_s}_label
+          return nil unless self.class.definitions.include? :#{attr.to_s}
+          self.class.definitions[:#{attr.to_s}].label(#{attr})
+        end
+      EOS
     end
   end
 end

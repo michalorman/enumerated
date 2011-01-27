@@ -1,7 +1,3 @@
-module UsersHelper
+module UsersHelper; end
 
-end
-
-module HairsHelper
-
-end
+module HairsHelper; end
