@@ -27,6 +27,15 @@ module Enumerated
           @definitions[:#{attr.to_s}].to_a
         end
       EOS
+
+      unless opts.include?(:helper) && !opts[:helper]
+        helper = opts[:helper] || "#{self.to_s.pluralize}Helper".constantize
+        helper.class_eval(<<-EOS, __FILE__, __LINE__ + 1)
+          def #{self.to_s.underscore}_#{attr.to_s.pluralize}
+            #{self.to_s}.#{attr.to_s.pluralize}
+          end
+        EOS
+      end
     end
   end
 end

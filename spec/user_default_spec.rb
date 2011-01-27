@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe UserDefault do
 
+  it { should include_module Enumerated }
   it { should respond_to :gender }
   it { should respond_to :gender= }
 

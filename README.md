@@ -13,7 +13,7 @@ Add to your Gemfile:
 
 ## Usage
 
-First you need to declare your enumerated attributes in the migration:
+First you need to declare your attributes that will be enumerated:
 
     create_table :users do |t|
         t.string :gender
