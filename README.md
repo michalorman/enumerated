@@ -1,10 +1,9 @@
 # Enumerator - yet another enumeration gem for Rails
 
 Ok, there are few gems that provides enumeration support to Rails ActiveRecord models, but still missing some
-features.
-
-The goal of the **Enumerator** gem is not to provide the feature richest enumeration support, but to make it
-useful to use together with selection/drop down lists.
+features. The goal of the **Enumerator** gem is not to provide the feature richest enumeration support, but to make it
+useful to use together with selection/drop down lists. So if you need advanced support consider usage of other
+gem, however if you simply need to work with selection lists this gem is for you.
 
 ## Installation
 
@@ -80,3 +79,23 @@ Second, and more preferred way is the localization file:
             gender:
               male: "Sir"
               female: "Madam"
+
+If labels are not explicitly defined the humanized versions are taken by default.
+
+## Advanced usage
+
+By default the order of enumeration options returned by the helper methods is unspecified. If
+you need to define certain order of the labels (eg. on selection list) use the ``:order`` parameter:
+
+    User.genders :order => [ :female, :male ]       # => [["Female", :female], ["Male", :male]]
+    user_genders :order => [ :female, :male ]       # => [["Female", :female], ["Male", :male]]
+
+You can also provide alphabetical order:
+
+    User.genders :order => :alphabetical        # => [["Female", :female], ["Male", :male]]
+
+Also you can define which enumeration options you want to method return:
+
+    User.genders :except => [:male]     # [["Female", :female]]
+    User.genders :only => [:female]     # [["Female", :female]]
+
