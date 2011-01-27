@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-rvm --create 1.9.2@optioner
-rvm use 1.9.2@optioner
+rvm --create 1.9.2@enumerated
+rvm use 1.9.2@enumerated

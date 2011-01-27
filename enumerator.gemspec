@@ -1,9 +1,9 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "enumerator/version"
+require "enumerated/version"
 
 Gem::Specification.new do |s|
-  s.name        = "enumerator"
+  s.name        = "enumerated"
   s.version     = Enumerator::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Michal Orman"]
@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.summary     = %q{TODO: Write a gem summary}
   s.description = %q{TODO: Write a gem description}
 
-  s.rubyforge_project = "enumerator"
+  s.rubyforge_project = "enumerated"
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

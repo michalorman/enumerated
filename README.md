@@ -1,13 +1,15 @@
-# Enumerator - yet another enumeration gem for Rails
+# Enumerated - yet another enumeration gem for ActiveRecord
 
 Ok, there are few gems that provides enumeration support to Rails ActiveRecord models, but still missing some
-features. The goal of the **Enumerator** gem is not to provide the feature richest enumeration support, but to make it
+features. The goal of the **Enumerated** gem is not to provide the feature richest enumeration support, but to make it
 useful to use together with selection/drop down lists. So if you need advanced support consider usage of other
 gem, however if you simply need to work with selection lists this gem is for you.
 
 ## Installation
 
-    gem 'enumerator'
+Add to your Gemfile:
+
+    gem 'enumerated'
 
 ## Usage
 
@@ -96,6 +98,6 @@ You can also provide alphabetical order:
 
 Also you can define which enumeration options you want to method return:
 
-    User.genders :except => [:male]     # [["Female", :female]]
-    User.genders :only => [:female]     # [["Female", :female]]
+    User.genders :except => [:male]     # => [["Female", :female]]
+    User.genders :only => [:female]     # => [["Female", :female]]
 
