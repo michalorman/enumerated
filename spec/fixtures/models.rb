@@ -1,5 +1,8 @@
-class UserDefault < ActiveRecord::Base
+require 'fixtures/helpers'
+
+class User < ActiveRecord::Base
   enumerated :gender, [:male, :female]
+  enumerated :hair, [:black, :brown, :red, :blond], :helper => HairsHelper
 end
 
 #class UserDefined < ActiveRecord::Base

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UserDefault do
+describe User do
 
   it { should include_module Enumerated }
   it { should respond_to :gender }

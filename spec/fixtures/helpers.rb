@@ -1,3 +1,7 @@
-module UserDefaultsHelper
+module UsersHelper
+
+end
+
+module HairsHelper
 
 end
