@@ -32,8 +32,8 @@ describe User do
 
     its(:gender) { should == :female }
     its(:gender_label) { should == "Female" }
-#    its(:female?) { should == true }
-#    its(:male?) { should == false }
+    its(:female?) { should == true }
+    its(:male?) { should == false }
   end
 
 end

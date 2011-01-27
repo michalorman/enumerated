@@ -18,6 +18,7 @@ module Enumerated
 
       define_helper_methods(attr, opts)
       define_label_methods(attr)
+      define_bang_methods(attr, enums)
     end
 
     private
@@ -49,6 +50,20 @@ module Enumerated
           self.class.definitions[:#{attr.to_s}].label(#{attr})
         end
       EOS
+    end
+
+    def define_bang_methods(attr, enums)
+      keys(enums).each do |e|
+        class_eval(<<-EOS, __FILE__, __LINE__ + 1)
+          def #{e}?
+            #{attr} == :#{e}
+          end
+        EOS
+      end
+    end
+
+    def keys(collection)
+      collection.is_a?(Array) ? collection : collection.keys
     end
   end
 end
