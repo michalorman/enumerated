@@ -1,0 +1,8 @@
+en:
+  activerecord:
+    enumerations:
+      user:
+        nationality:
+          gbr: "English"
+          esp: "Spanish"
+          pol: "Polish"

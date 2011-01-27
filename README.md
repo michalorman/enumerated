@@ -13,7 +13,7 @@ Add to your Gemfile:
 
 ## Usage
 
-First you need to declare your attributes that will be enumerated:
+First you need to define your attributes that will be enumerated:
 
     create_table :users do |t|
         t.string :gender

@@ -45,4 +45,26 @@ describe User do
     its(:male?) { should == true }
   end
 
+  context "when assigned a hair" do
+    before(:each) { subject.hair = :blond }
+
+    its(:hair) { should == :blond }
+    its(:hair_label) { should == "Blond hair" }
+    its(:black?) { should == false }
+    its(:brown?) { should == false }
+    its(:red?) { should == false }
+    its(:blond?) { should == true }
+  end
+
+  context "when assigned a hair using bang method" do
+    before(:each) { subject.red! }
+
+    its(:hair) { should == :red }
+    its(:hair_label) { should == "Red hair" }
+    its(:black?) { should == false }
+    its(:brown?) { should == false }
+    its(:red?) { should == true }
+    its(:blond?) { should == false }
+  end
+
 end
