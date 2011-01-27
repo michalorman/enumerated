@@ -4,7 +4,7 @@ require "enumerated/version"
 
 Gem::Specification.new do |s|
   s.name        = "enumerated"
-  s.version     = Enumerator::VERSION
+  s.version     = Enumerated::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Michal Orman"]
   s.email       = ["michal.orman@gmail.com"]

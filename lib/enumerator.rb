@@ -1,3 +1,0 @@
-module Enumerator
-  # Your code goes here...
-end
