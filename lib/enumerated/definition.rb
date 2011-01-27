@@ -5,7 +5,7 @@ module Enumerated
 
     def initialize(declaration)
       if declaration.is_a?(Array)
-        @declaration = to_h(declaration)
+        @declaration = declaration
       elsif declaration.is_a?(Hash)
         @declaration = declaration.invert
       else
@@ -14,17 +14,12 @@ module Enumerated
     end
 
     def to_a
-      @declaration.to_a
-    end
-
-    private
-
-    def to_h(array)
-      hash = Hash.new
-      array.each do |a|
-        hash[a.to_s.humanize] = a
+      return @declaration.to_a if @declaration.is_a?(Hash)
+      result = []
+      @declaration.each do |d|
+        result << [d.to_s.humanize, d]
       end
-      hash
+      result
     end
   end
 
