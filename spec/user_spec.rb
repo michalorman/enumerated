@@ -36,4 +36,13 @@ describe User do
     its(:male?) { should == false }
   end
 
+  context "when assigned a gender using bang method" do
+    before(:each) { subject.male! }
+
+    its(:gender) { should == :male }
+    its(:gender_label) { should == "Male" }
+    its(:female?) { should == false }
+    its(:male?) { should == true }
+  end
+
 end

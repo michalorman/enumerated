@@ -58,6 +58,9 @@ module Enumerated
           def #{e}?
             #{attr} == :#{e}
           end
+          def #{e}!
+            self.#{attr} = :#{e}
+          end
         EOS
       end
     end
