@@ -9,4 +9,5 @@ connection = ActiveRecord::Base.connection
 
 connection.create_table(:users, :force => true) do |t|
   t.string :gender
+  t.string :hair
 end
