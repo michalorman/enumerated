@@ -2,12 +2,11 @@ require 'spec_helper'
 
 describe UsersHelper do
   it { should have_defined_method :user_genders }
-end
+  it { should_not have_defined_method :user_hairs }
 
-class IncludingUsersHelper
-  include UsersHelper
-end
+  context "should include method" do
+    subject { Class.new { include UsersHelper }.new }
 
-describe IncludingUsersHelper do
-  its(:user_genders) { should == [["Male", :male], ["Female", :female]] }
+    its(:user_genders) { should == [["Male", :male], ["Female", :female]] }
+  end
 end
