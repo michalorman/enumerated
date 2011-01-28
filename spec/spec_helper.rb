@@ -12,3 +12,7 @@ connection.create_table(:users, :force => true) do |t|
   t.string :hair
   t.string :nationality
 end
+
+connection.create_table(:dogs, :force => true) do |t|
+  t.string :name
+end

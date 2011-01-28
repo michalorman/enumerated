@@ -41,6 +41,7 @@ describe User do
   context "when assigned a gender using bang method" do
     before(:each) { subject.male! }
 
+    it { should be_valid }
     its(:gender) { should == :male }
     its(:gender_label) { should == "Male" }
     its(:female?) { should == false }
@@ -59,6 +60,7 @@ describe User do
   context "when assigned a hair" do
     before(:each) { subject.hair = :blond }
 
+    it { should be_valid }
     its(:hair) { should == :blond }
     its(:hair_label) { should == "Blond hair" }
     its(:black?) { should == false }
@@ -70,6 +72,7 @@ describe User do
   context "when assigned a hair using bang method" do
     before(:each) { subject.red! }
 
+    it { should be_valid }
     its(:hair) { should == :red }
     its(:hair_label) { should == "Red hair" }
     its(:black?) { should == false }
@@ -89,6 +92,7 @@ describe User do
   context "when assigned a nationality" do
     before(:each) { subject.nationality = :esp }
 
+    it { should be_valid }
     its(:nationality) { should == :esp }
     its(:nationality_label) { should == "Spanish" }
     its(:gbr?) { should == false }
@@ -99,6 +103,7 @@ describe User do
   context "when assigned a nationality using bang method" do
     before(:each) { subject.pol! }
 
+    it { should be_valid }
     its(:nationality) { should == :pol }
     its(:nationality_label) { should == "Polish" }
     its(:gbr?) { should == false }

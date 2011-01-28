@@ -39,12 +39,15 @@ module Enumerated
       EOS
 
       unless opts.include?(:helper) && !opts[:helper]
-        helper = opts[:helper] || "#{self.to_s.pluralize}Helper".constantize
-        helper.class_eval(<<-EOS, __FILE__, __LINE__ + 1)
-          def #{self.to_s.underscore}_#{attr.to_s.pluralize}
-            #{self.to_s}.#{attr.to_s.pluralize}
-          end
-        EOS
+        helper = opts[:helper] || "#{self.to_s.pluralize}Helper"
+        if helper.is_a?(Module) || Object.const_defined?(helper.to_sym, false)
+          helper = helper.constantize unless helper.is_a?(Module)
+          helper.class_eval(<<-EOS, __FILE__, __LINE__ + 1)
+            def #{self.to_s.underscore}_#{attr.to_s.pluralize}
+              #{self.to_s}.#{attr.to_s.pluralize}
+            end
+          EOS
+        end
       end
     end
 
@@ -71,7 +74,8 @@ module Enumerated
     end
 
     def keys(collection)
-      collection.is_a?(Array) ? collection : collection.keys
+      result = collection.is_a?(Array) ? collection : collection.keys
+      result.map { |r| r.to_sym }
     end
 
     def apply_validations(attr, enums, opts)

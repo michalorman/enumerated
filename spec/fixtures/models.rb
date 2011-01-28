@@ -7,3 +7,7 @@ class User < ActiveRecord::Base
   enumerated :hair, {black: "Black hair", brown: "Brown hair", red: "Red hair", blond: "Blond hair"}, :helper => HairsHelper, :validate => false
   enumerated :nationality, %w(gbr esp pol), :helper => false
 end
+
+class Dog < ActiveRecord::Base
+  enumerated :name, %w(max sam), :nillable => false
+end
