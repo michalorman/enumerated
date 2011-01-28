@@ -31,6 +31,14 @@ describe User do
       it "genders" do
         subject.genders(:order => [:female, :male]).should == [["Female", :female], ["Male", :male]]
       end
+
+      it "hairs" do
+        subject.hairs(:order => [:red, :blond, :brown, :black]).should == [["Red hair", :red], ["Blond hair", :blond], ["Brown hair", :brown], ["Black hair", :black]]
+      end
+
+      it "nationalities" do
+        subject.nationalities(:order => [:pol, :esp, :gbr]).should == [["Polish", "pol"], ["Spanish", "esp"], ["English", "gbr"]]
+      end
     end
   end
 

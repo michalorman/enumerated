@@ -35,7 +35,7 @@ module Enumerated
       return arr if opts.empty? || !opts.include?(:order)
       ordered = []
       opts[:order].each do |o|
-        ordered << arr.select { |a| a[1] == o }[0]
+        ordered << arr.select { |a| a[1].to_sym == o }[0]
       end
       ordered
     end
