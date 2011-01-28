@@ -31,7 +31,7 @@ module Enumerated
     def define_helper_methods(attr, opts)
       class_eval(<<-EOS, __FILE__, __LINE__ + 1)
         def self.#{attr.to_s.pluralize}(opts = {})
-          @definitions[:#{attr.to_s}].to_a(opts)
+          @definitions[:#{attr.to_s}].to_a(opts )
         end
         def self.definitions
           @definitions

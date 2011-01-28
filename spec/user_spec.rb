@@ -40,6 +40,12 @@ describe User do
         subject.nationalities(:order => [:pol, :esp, :gbr]).should == [["Polish", "pol"], ["Spanish", "esp"], ["English", "gbr"]]
       end
     end
+
+    context "blacklisted" do
+      it "genders" do
+        subject.genders(:except => [:male]).should == [["Female", :female]]
+      end
+    end
   end
 
   context "when assigned a gender" do

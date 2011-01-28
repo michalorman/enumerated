@@ -9,7 +9,8 @@ module Enumerated
     end
 
     def to_a(opts = {})
-      ordered for_select, opts
+      result = filtered for_select, opts
+      ordered result, opts
     end
 
     def label(key)
@@ -38,6 +39,20 @@ module Enumerated
         ordered << arr.select { |a| a[1].to_sym == o }[0]
       end
       ordered
+    end
+
+    def filtered(arr, opts)
+      return arr if opts.empty? || !(opts.include?(:except) || opts.include?(:only))
+      raise ArgumentError, "Cannot pass both :except and :only parameters!" if opts.include?(:except) && opts.include?(:only)
+      opts.include?(:except) ? except(arr, opts[:except]) : only(arr, opts[:only])
+    end
+
+    def except(arr, keys)
+      arr.reject { |a| keys.include?(a[1]) }
+    end
+
+    def only(arr, keys)
+
     end
   end
 
