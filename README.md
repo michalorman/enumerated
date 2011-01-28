@@ -5,6 +5,14 @@ features. The goal of the **Enumerated** gem is not to provide the feature riche
 useful to use together with selection/drop down lists. So if you need advanced support consider usage of other
 gem, however if you simply need to work with selection lists this gem is for you.
 
+The **Enumerated** gem will provide support to translate enumerated attributes into labels that are shown in
+selection lists on view and into keys which are stored in the database. This decouples the values stored in
+database and those presented to user on view, so you can freely change labels and no database changes are
+required. **I18n** is supported by default.
+
+The enumerated attribute values are stored in database as strings, so you can freely reassign labels. If
+you want to modify enumeration's key simply write the migration that will rename appropriate rows.
+
 ## Installation
 
 Add to your Gemfile:
@@ -86,8 +94,9 @@ If labels are not explicitly defined the humanized versions are taken by default
 
 ## Advanced usage
 
-By default the order of enumeration options returned by the helper methods is unspecified. If
-you need to define certain order of the labels (eg. on selection list) use the ``:order`` parameter:
+By default the order of enumeration options returned by the helper methods is unspecified (albeit most probably
+it will match the order of declaration). If you need to define certain order of the labels (eg. on selection list)
+use the ``:order`` parameter:
 
     User.genders :order => [ :female, :male ]       # => [["Female", :female], ["Male", :male]]
     user_genders :order => [ :female, :male ]       # => [["Female", :female], ["Male", :male]]
@@ -101,3 +110,26 @@ Also you can define which enumeration options you want to method return:
     User.genders :except => [:male]     # => [["Female", :female]]
     User.genders :only => [:female]     # => [["Female", :female]]
 
+Labels might be overridden:
+
+    User.genders :override => { :male => "Sir" }    # => [["Sir", :male], ["Female", :female]]
+
+*Note that all parameters shown in this section also applies to method defined in helper module.*
+
+## Validation
+
+By default the ``enumerated`` declaration will add the validation for inclusion of the values specified
+in the declaration. It means that by default model won't be valid if enumerated attribute will have value
+other than specified in the ``enumerated`` declaration:
+
+    class User < ActiveRecord::Base
+        enumerated :gender, [:male, :female]
+        # Implicitly adds the following:
+        validates_inclusion_of :gender, [:male, :female]
+    end
+
+If you want to prevent **Enumerated** gem adding the validation type:
+
+    class User < ActiveRecord::Base
+        enumerated :gender, [:male, :female], :validation => false
+    end
