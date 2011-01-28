@@ -80,7 +80,7 @@ module Enumerated
 
     def apply_validations(attr, enums, opts)
       unless opts.disabled?(:validate)
-        inclusion = opts.disabled?(:nillable) ? "#{keys(enums).to_s}" : "[nil] + #{keys(enums).to_s}"
+        inclusion = opts.disabled?(:nillable) ? "#{keys(enums).to_s}" : "[nil, ''] + #{keys(enums).to_s}"
         class_eval(<<-EOS, __FILE__, __LINE__ + 1)
           validates :#{attr.to_s}, :inclusion => #{inclusion}
         EOS

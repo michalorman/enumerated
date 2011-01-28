@@ -26,4 +26,13 @@ describe Dog do
     its(:errors) { should have(1).error_on(:name)}
   end
 
+  context "when assigned a blank name" do
+    before(:each) { subject.name = ""; subject.valid? }
+
+    its(:name) { should == "" }
+    it { should_not be_valid }
+    its(:errors) { should_not be_empty }
+    its(:errors) { should have(1).error_on(:name)}
+  end
+
 end
