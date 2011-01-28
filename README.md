@@ -127,7 +127,7 @@ other than specified in the ``enumerated`` declaration:
     class User < ActiveRecord::Base
         enumerated :gender, [:male, :female]
         # Implicitly adds the following:
-        validates :gender, :inclusion => [nil, :male, :female]
+        validates :gender, :inclusion => [nil, '', :male, :female]
     end
 
 If you want to prevent **Enumerated** gem adding the validation type:
