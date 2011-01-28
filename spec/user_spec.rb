@@ -41,9 +41,17 @@ describe User do
       end
     end
 
-    context "blacklisted" do
+    context "except" do
       it "genders" do
         subject.genders(:except => [:male]).should == [["Female", :female]]
+      end
+
+      it "hairs" do
+        subject.hairs(:order => [:red, :blond], :except => [:brown, :black]).should == [["Red hair", :red], ["Blond hair", :blond]]
+      end
+
+      it "nationalities" do
+        subject.nationalities(:order => [:esp, :gbr], :except => [:pol]).should == [["Spanish", "esp"], ["English", "gbr"]]
       end
     end
   end
