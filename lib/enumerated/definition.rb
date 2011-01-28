@@ -36,7 +36,7 @@ module Enumerated
       return arr if opts.empty? || !opts.include?(:order)
       ordered = []
       opts[:order].each do |o|
-        ordered << arr.select { |a| a[1].to_sym == o }[0]
+        ordered << arr.select { |a| a[1].to_sym == o.to_sym }[0]
       end
       ordered
     end
@@ -48,11 +48,11 @@ module Enumerated
     end
 
     def except(arr, keys)
-      arr.reject { |a| keys.include?(a[1].to_sym) }
+      arr.reject { |a| keys.map(&:to_sym).include?(a[1].to_sym) }
     end
 
     def only(arr, keys)
-      arr.select { |a| keys.include?(a[1].to_sym) }
+      arr.select { |a| keys.map(&:to_sym).include?(a[1].to_sym) }
     end
   end
 
