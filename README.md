@@ -10,8 +10,9 @@ selection lists on view and into keys which are stored in the database. This dec
 database and those presented to user on view, so you can freely change labels and no database changes are
 required. **I18n** is supported by default.
 
-The enumerated attribute values are stored in database as strings, so you can freely reassign labels. If
-you want to modify enumeration's key simply write the migration that will rename appropriate rows.
+The enumerated attribute keys are stored in database as strings. If you want to modify enumeration's key simply
+write the migration that will rename appropriate rows. Changing the label doesn't require any modifications
+in database.
 
 ## Installation
 
@@ -90,7 +91,8 @@ Second, and more preferred way is the localization file:
               male: "Sir"
               female: "Madam"
 
-If labels are not explicitly defined the humanized versions are taken by default.
+If labels are not explicitly defined the humanized versions are taken by default. Labels defined
+in ``Hash`` will override those defined in localization file.
 
 ## Advanced usage
 
