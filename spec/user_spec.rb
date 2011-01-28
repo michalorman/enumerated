@@ -68,6 +68,20 @@ describe User do
         subject.nationalities(:only => [:pol]).should == [["Polish", "pol"]]
       end
     end
+
+    context "override" do
+      it "should override the label for female" do
+        subject.genders(:override => {:female => "Madam"}).should == [["Male", :male], ["Madam", :female]]
+      end
+
+      it "should override the labels for red and black" do
+        subject.hairs(:order => [:red, :blond, :brown, :black], :override => { :red => "Shiny Red Hair", :black => "Hell Black Hair" }).should == [["Shiny Red Hair", :red], ["Blond hair", :blond], ["Brown hair", :brown], ["Hell Black Hair", :black]]
+      end
+
+      it "should override the label for pol" do
+        subject.nationalities(:except => [:gbr], :order => [:esp, :pol], :override => { :pol => "Polak" }).should == [["Spanish", "esp"], ["Polak", "pol"]]
+      end
+    end
   end
 
   context "when assigned a gender" do

@@ -10,6 +10,7 @@ module Enumerated
 
     def to_a(opts = {})
       result = filtered for_select, opts
+      result = overridden result, opts
       ordered result, opts
     end
 
@@ -53,6 +54,14 @@ module Enumerated
 
     def only(arr, keys)
       arr.select { |a| keys.map(&:to_sym).include?(a[1].to_sym) }
+    end
+
+    def overridden(arr, opts)
+      return arr if opts.empty? || !opts.include?(:override)
+      opts[:override].each do |key, value|
+        arr.select { |a| a[1].to_sym == key.to_sym }[0][0] = value
+      end
+      arr
     end
   end
 

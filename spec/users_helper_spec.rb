@@ -25,5 +25,9 @@ describe UsersHelper do
     it "should return only male as user genders" do
       subject.user_genders(:only => [:male]).should == [["Male", :male]]
     end
+
+    it "should override the label for female" do
+      subject.user_genders(:override => {:female => "Madam"}).should == [["Male", :male], ["Madam", :female]]
+    end
   end
 end

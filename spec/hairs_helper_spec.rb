@@ -8,7 +8,7 @@ describe HairsHelper do
   context "should include method" do
     subject { Class.new { include HairsHelper }.new }
 
-    its(:user_hairs) { should  == [["Black hair", :black], ["Brown hair", :brown], ["Red hair", :red], ["Blond hair", :blond]] }
+    its(:user_hairs) { should == [["Black hair", :black], ["Brown hair", :brown], ["Red hair", :red], ["Blond hair", :blond]] }
   end
 
   context "parametrized" do
@@ -24,6 +24,10 @@ describe HairsHelper do
 
     it "should return only blond, red user hairs" do
       subject.user_hairs(:only => %w(blond red), :order => %w(blond red)).should == [["Blond hair", :blond], ["Red hair", :red]]
+    end
+
+    it "should override the labels for red and black" do
+      subject.user_hairs(:order => [:red, :blond, :brown, :black], :override => {:red => "Shiny Red Hair", :black => "Hell Black Hair"}).should == [["Shiny Red Hair", :red], ["Blond hair", :blond], ["Brown hair", :brown], ["Hell Black Hair", :black]]
     end
   end
 end
