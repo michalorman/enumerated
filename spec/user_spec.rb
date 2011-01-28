@@ -26,6 +26,12 @@ describe User do
     its(:genders) { should == [["Male", :male], ["Female", :female]] }
     its(:hairs) { should == [["Black hair", :black], ["Brown hair", :brown], ["Red hair", :red], ["Blond hair", :blond]] }
     its(:nationalities) { should == [["English", "gbr"], ["Spanish", "esp"], ["Polish", "pol"]] }
+
+    context "ordered" do
+      it "genders" do
+        subject.genders(:order => [:female, :male]).should == [["Female", :female], ["Male", :male]]
+      end
+    end
   end
 
   context "when assigned a gender" do
