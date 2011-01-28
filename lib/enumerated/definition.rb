@@ -18,7 +18,7 @@ module Enumerated
     end
 
     def label(key)
-      @declaration.is_a?(Hash) ? @declaration[key] : resolve_label(key)
+      @declaration.is_a?(Hash) ? @declaration[key.to_sym] : resolve_label(key)
     end
 
     private

@@ -48,6 +48,16 @@ describe User do
     its(:male?) { should == true }
   end
 
+  context "when assigned a gender as string" do
+    before(:each) { subject.gender = "female" }
+
+    it { should be_valid }
+    its(:gender) { should == "female" }
+    its(:gender_label) { should == "Female" }
+    its(:female?) { should == true }
+    its(:male?) { should == false }
+  end
+
   context "when assigned an invalid gender" do
     before(:each) { subject.gender = :unknown; subject.valid? }
 
@@ -91,6 +101,18 @@ describe User do
     its(:blond?) { should == false }
   end
 
+  context "when assigned a hair as string" do
+    before(:each) { subject.hair = "brown" }
+
+    it { should be_valid }
+    its(:hair) { should == "brown" }
+    its(:hair_label) { should == "Brown hair" }
+    its(:black?) { should == false }
+    its(:brown?) { should == true }
+    its(:red?) { should == false }
+    its(:blond?) { should == false }
+  end
+
   context "when assigned a blank hair" do
     before(:each) { subject.hair = "" }
 
@@ -131,6 +153,17 @@ describe User do
     its(:gbr?) { should == false }
     its(:esp?) { should == false }
     its(:pol?) { should == true }
+  end
+
+  context "when assigned a nationality as string" do
+    before(:each) { subject.nationality = "gbr" }
+
+    it { should be_valid }
+    its(:nationality) { should == "gbr" }
+    its(:nationality_label) { should == "English" }
+    its(:gbr?) { should == true }
+    its(:esp?) { should == false }
+    its(:pol?) { should == false }
   end
 
   context "when assigned a blank nationality" do

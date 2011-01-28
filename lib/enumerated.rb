@@ -61,10 +61,10 @@ module Enumerated
     end
 
     def define_bang_methods(attr, enums)
-      keys(enums).each do |e|
+      keys(enums).map(&:to_sym).each do |e|
         class_eval(<<-EOS, __FILE__, __LINE__ + 1)
           def #{e}?
-            #{attr} == :#{e}
+            #{attr}.to_sym == :#{e}
           end
           def #{e}!
             self.#{attr} = :#{e}
@@ -74,13 +74,14 @@ module Enumerated
     end
 
     def keys(collection)
-      result = collection.is_a?(Array) ? collection : collection.keys
-      result.map { |r| r.to_sym }
+      collection.is_a?(Array) ? collection : collection.keys
     end
 
     def apply_validations(attr, enums, opts)
       unless opts.disabled?(:validate)
-        inclusion = opts.disabled?(:nillable) ? "#{keys(enums).to_s}" : "[nil, ''] + #{keys(enums).to_s}"
+        inclusion = opts.disabled?(:nillable) ?
+            "#{keys(enums).map(&:to_sym).to_s} + #{keys(enums).map(&:to_s).to_s}" :
+            "[nil, ''] + #{keys(enums).map(&:to_sym).to_s} + #{keys(enums).map(&:to_s).to_s}"
         class_eval(<<-EOS, __FILE__, __LINE__ + 1)
           validates :#{attr.to_s}, :inclusion => #{inclusion}
         EOS
