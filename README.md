@@ -142,3 +142,7 @@ If you do not want to include ``nil`` type:
     class User < ActiveRecord::Base
         enumerated :gender, [:male, :female], :nillable => false
     end
+
+## Issues
+
+    * Currently not supporting STI
