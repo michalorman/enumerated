@@ -67,4 +67,24 @@ describe User do
     its(:blond?) { should == false }
   end
 
+  context "when assigned a nationality" do
+    before(:each) { subject.nationality = :esp }
+
+    its(:nationality) { should == :esp }
+    its(:nationality_label) { should == "Spanish" }
+    its(:gbr?) { should == false }
+    its(:esp?) { should == true }
+    its(:pol?) { should == false }
+  end
+
+  context "when assigned a nationality using bang method" do
+    before(:each) { subject.pol! }
+
+    its(:nationality) { should == :pol }
+    its(:nationality_label) { should == "Polish" }
+    its(:gbr?) { should == false }
+    its(:esp?) { should == false }
+    its(:pol?) { should == true }
+  end
+
 end
