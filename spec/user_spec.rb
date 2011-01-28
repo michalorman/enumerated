@@ -54,6 +54,20 @@ describe User do
         subject.nationalities(:order => [:esp, :gbr], :except => [:pol]).should == [["Spanish", "esp"], ["English", "gbr"]]
       end
     end
+
+    context "only" do
+      it "genders" do
+        subject.genders(:only => [:male]).should == [["Male", :male]]
+      end
+
+      it "hairs" do
+        subject.hairs(:order => [:brown, :black], :only => [:brown, :black]).should == [["Brown hair", :brown], ["Black hair", :black]]
+      end
+
+      it "nationalities" do
+        subject.nationalities(:only => [:pol]).should == [["Polish", "pol"]]
+      end
+    end
   end
 
   context "when assigned a gender" do

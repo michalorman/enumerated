@@ -48,11 +48,11 @@ module Enumerated
     end
 
     def except(arr, keys)
-      arr.reject { |a| keys.include?(a[1]) }
+      arr.reject { |a| keys.include?(a[1].to_sym) }
     end
 
     def only(arr, keys)
-
+      arr.select { |a| keys.include?(a[1].to_sym) }
     end
   end
 
