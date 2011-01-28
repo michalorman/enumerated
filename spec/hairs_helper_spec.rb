@@ -3,7 +3,7 @@ require 'spec_helper'
 describe HairsHelper do
   it { should have_defined_method :user_hairs }
   it { should_not have_defined_method :user_genders }
-  it { should_not have_defined_method :user_heights }
+  it { should_not have_defined_method :user_nationalities }
 
   context "should include method" do
     subject { Class.new { include HairsHelper }.new }

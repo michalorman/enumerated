@@ -13,7 +13,7 @@ module Enumerated
     def enumerated(attr, enums, opts = {})
       class_eval do
         @definitions ||= {}
-        @definitions[attr.to_sym] = Definition.new(enums)
+        @definitions[attr.to_sym] = Definition.new(self.to_s, attr.to_s, enums)
       end
 
       define_helper_methods(attr, opts)
@@ -46,7 +46,7 @@ module Enumerated
     def define_label_methods(attr)
       class_eval(<<-EOS, __FILE__, __LINE__ + 1)
         def #{attr.to_s}_label
-          return nil unless self.class.definitions.include? :#{attr.to_s}
+          return nil unless self.class.definitions.include?(:#{attr.to_s}) && !#{attr}.blank?
           self.class.definitions[:#{attr.to_s}].label(#{attr})
         end
       EOS
