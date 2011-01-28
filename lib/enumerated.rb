@@ -11,6 +11,10 @@ module Enumerated
   module ClassMethods
     # Declares that given attribute is enumerated.
     def enumerated(attr, enums, opts = {})
+      def opts.disabled?(sym)
+        include?(sym) && !self[sym]
+      end
+
       class_eval do
         @definitions ||= {}
         @definitions[attr.to_sym] = Definition.new(self.to_s, attr.to_s, enums)
@@ -19,6 +23,7 @@ module Enumerated
       define_helper_methods(attr, opts)
       define_label_methods(attr)
       define_bang_methods(attr, enums)
+      apply_validations(attr, enums, opts)
     end
 
     private
@@ -67,6 +72,15 @@ module Enumerated
 
     def keys(collection)
       collection.is_a?(Array) ? collection : collection.keys
+    end
+
+    def apply_validations(attr, enums, opts)
+      unless opts.disabled?(:validate)
+        inclusion = opts.disabled?(:nillable) ? "#{keys(enums).to_s}" : "[nil] + #{keys(enums).to_s}"
+        class_eval(<<-EOS, __FILE__, __LINE__ + 1)
+          validates :#{attr.to_s}, :inclusion => #{inclusion}
+        EOS
+      end
     end
   end
 end

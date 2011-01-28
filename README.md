@@ -125,11 +125,18 @@ other than specified in the ``enumerated`` declaration:
     class User < ActiveRecord::Base
         enumerated :gender, [:male, :female]
         # Implicitly adds the following:
-        validates_inclusion_of :gender, [:male, :female]
+        validates :gender, :inclusion => [nil, :male, :female]
     end
 
 If you want to prevent **Enumerated** gem adding the validation type:
 
     class User < ActiveRecord::Base
-        enumerated :gender, [:male, :female], :validation => false
+        enumerated :gender, [:male, :female], :validate => false
+    end
+
+By default **Enumerated** will add ``nil`` value to the array of expected values (in inclusion statement).
+If you do not want to include ``nil`` type:
+
+    class User < ActiveRecord::Base
+        enumerated :gender, [:male, :female], :nillable => false
     end

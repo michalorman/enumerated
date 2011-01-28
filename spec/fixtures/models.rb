@@ -4,6 +4,6 @@ I18n.load_path << File.join(File.dirname(__FILE__), '..', '..', 'locales', 'en.y
 
 class User < ActiveRecord::Base
   enumerated :gender, [:male, :female]
-  enumerated :hair, {black: "Black hair", brown: "Brown hair", red: "Red hair", blond: "Blond hair"}, :helper => HairsHelper
-  enumerated :nationality, [:gbr, :esp, :pol], :helper => false
+  enumerated :hair, {black: "Black hair", brown: "Brown hair", red: "Red hair", blond: "Blond hair"}, :helper => HairsHelper, :validate => false
+  enumerated :nationality, %w(gbr esp pol), :helper => false
 end

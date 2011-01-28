@@ -9,6 +9,7 @@ describe User do
   it { should respond_to :hair= }
   it { should respond_to :nationality }
   it { should respond_to :nationality= }
+  it { should be_valid }
 
   its(:gender) { should == nil }
   its(:gender_label) { should == nil }
@@ -24,12 +25,13 @@ describe User do
 
     its(:genders) { should == [["Male", :male], ["Female", :female]] }
     its(:hairs) { should == [["Black hair", :black], ["Brown hair", :brown], ["Red hair", :red], ["Blond hair", :blond]] }
-    its(:nationalities) { should == [["English", :gbr], ["Spanish", :esp], ["Polish", :pol]] }
+    its(:nationalities) { should == [["English", "gbr"], ["Spanish", "esp"], ["Polish", "pol"]] }
   end
 
   context "when assigned a gender" do
     before(:each) { subject.gender = :female }
 
+    it { should be_valid }
     its(:gender) { should == :female }
     its(:gender_label) { should == "Female" }
     its(:female?) { should == true }
@@ -43,6 +45,15 @@ describe User do
     its(:gender_label) { should == "Male" }
     its(:female?) { should == false }
     its(:male?) { should == true }
+  end
+
+  context "when assigned an invalid gender" do
+    before(:each) { subject.gender = :unknown; subject.valid? }
+
+    it { should_not be_valid }
+
+    its(:errors) { should_not be_empty }
+    its(:errors) { should have(1).error_on(:gender) }
   end
 
   context "when assigned a hair" do
@@ -65,6 +76,14 @@ describe User do
     its(:brown?) { should == false }
     its(:red?) { should == true }
     its(:blond?) { should == false }
+  end
+
+  context "when assigned an invalid hair" do
+    # Validation for :hair is turned off
+    before(:each) { subject.hair = :curly; subject.valid? }
+
+    it { should be_valid }
+    its(:errors) { should be_empty }
   end
 
   context "when assigned a nationality" do
