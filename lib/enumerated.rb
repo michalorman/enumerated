@@ -43,8 +43,8 @@ module Enumerated
         if helper.is_a?(Module) || Object.const_defined?(helper.to_sym, false)
           helper = helper.constantize unless helper.is_a?(Module)
           helper.class_eval(<<-EOS, __FILE__, __LINE__ + 1)
-            def #{self.to_s.underscore}_#{attr.to_s.pluralize}
-              #{self.to_s}.#{attr.to_s.pluralize}
+            def #{self.to_s.underscore}_#{attr.to_s.pluralize}(opts = {})
+              #{self.to_s}.#{attr.to_s.pluralize}(opts)
             end
           EOS
         end

@@ -28,43 +28,43 @@ describe User do
     its(:nationalities) { should == [["English", "gbr"], ["Spanish", "esp"], ["Polish", "pol"]] }
 
     context "ordered" do
-      it "genders" do
+      it "should return genders in female, male order" do
         subject.genders(:order => [:female, :male]).should == [["Female", :female], ["Male", :male]]
       end
 
-      it "hairs" do
+      it "should return hairs in red, blond, brown, black order" do
         subject.hairs(:order => [:red, :blond, :brown, :black]).should == [["Red hair", :red], ["Blond hair", :blond], ["Brown hair", :brown], ["Black hair", :black]]
       end
 
-      it "nationalities" do
+      it "should return nationalities in pol, esp, gbr order" do
         subject.nationalities(:order => [:pol, :esp, :gbr]).should == [["Polish", "pol"], ["Spanish", "esp"], ["English", "gbr"]]
       end
     end
 
     context "except" do
-      it "genders" do
+      it "should return genders except male" do
         subject.genders(:except => [:male]).should == [["Female", :female]]
       end
 
-      it "hairs" do
+      it "should return hairs except brown and black" do
         subject.hairs(:order => [:red, :blond], :except => [:brown, :black]).should == [["Red hair", :red], ["Blond hair", :blond]]
       end
 
-      it "nationalities" do
+      it "should return nationalities except pol" do
         subject.nationalities(:order => [:esp, :gbr], :except => [:pol]).should == [["Spanish", "esp"], ["English", "gbr"]]
       end
     end
 
     context "only" do
-      it "genders" do
+      it "should return only male gender" do
         subject.genders(:only => [:male]).should == [["Male", :male]]
       end
 
-      it "hairs" do
+      it "should return only brown and black hair" do
         subject.hairs(:order => [:brown, :black], :only => [:brown, :black]).should == [["Brown hair", :brown], ["Black hair", :black]]
       end
 
-      it "nationalities" do
+      it "should return only pol nationality" do
         subject.nationalities(:only => [:pol]).should == [["Polish", "pol"]]
       end
     end
