@@ -145,4 +145,4 @@ If you do not want to include ``nil`` type:
 
 ## Issues
 
-    * Currently not supporting STI
+  * Currently not supporting STI
