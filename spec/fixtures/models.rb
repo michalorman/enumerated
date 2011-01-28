@@ -1,6 +1,6 @@
 require 'fixtures/helpers'
 
-I18n.load_path << File.join(File.dirname(__FILE__), '..', '..', 'locales', 'en.yml')
+I18n.load_path << File.join(File.dirname(__FILE__), '..', 'locales', 'en.yml')
 
 class User < ActiveRecord::Base
   enumerated :gender, [:male, :female]

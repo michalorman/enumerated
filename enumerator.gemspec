@@ -8,9 +8,9 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Michal Orman"]
   s.email       = ["michal.orman@gmail.com"]
-  s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.homepage    = "https://github.com/michalorman/enumerated"
+  s.summary     = %q{Yet another enumeration gem for ActiveRecord}
+  s.description = %q{Goal of the Enumerated gem is to provide support to use enumerations on selection/drop down lists.}
 
   s.rubyforge_project = "enumerated"
 
